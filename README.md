@@ -1,27 +1,33 @@
 # TestApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.2.
+Projet de test de purge CSS sur une application Angular PrimeNg.
 
-## Development server
+## Purge CSS
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Une librairie Javascript qui analyse le code statique produit après le build Angular. L'analyse porte aussi bien sur les relations HTML / sélecteurs CSS que sur le Javascript qui manipule les dits-sélecteurs.
 
-## Code scaffolding
+### Lancement de la purge
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Un script .js est lancé après le build Angular, via le fichier package.json :
 
-## Build
+`"postbuild": "node postbuild.js"`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+On doit remplacer le ou les fichiers produits par le build avant de commit le code. Il faudra donc modifier le dossier de sortie de la purge (purgecss.config.js) :
 
-## Running unit tests
+`output: 'purge/'`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Périmètre
 
-## Running end-to-end tests
+Les librairies suivantes sont concernées :
+- PrimeNg / theme : la librairie de composants principale.
+- PrimeFlex : libraire de classes CSS utilitaires.
+- PrimeIcons : librairie de fonte web.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Tests de la purge
 
-## Further help
+Le script actuel ne remplace pas le fichier CSS dans le dossier /dist, il crée une version dans le dossier /purge. On doit tester son application avant/après le passage de la purge. Pour ce faire, on peut juste remplacer le bundle par celui généré dans /purge. On lance ensuite l'application en mode static depuis le dossier /dist.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+`"start:static": "cd dist/purge-app && http-server . -p 4400"`
+
+
+
