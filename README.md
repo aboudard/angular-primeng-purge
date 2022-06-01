@@ -30,4 +30,8 @@ Le script actuel ne remplace pas le fichier CSS dans le dossier /dist, il crée 
 `"start:static": "cd dist/purge-app && http-server . -p 4400"`
 
 
+## Exceptions notables PrimeNg
 
+Ces composants présentent de la concaténation dans la génération des styles, avec [ngClass] par exemple :
+- directive pButton
+- composant Message

@@ -9,6 +9,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import {RippleModule} from 'primeng/ripple';
 import {InputTextModule} from 'primeng/inputtext';
 import { PushinputComponent } from './comp/pushinput/pushinput.component';
+import {MessagesModule} from 'primeng/messages';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,10 @@ import { PushinputComponent } from './comp/pushinput/pushinput.component';
     PushinputComponent
   ],
   imports: [
+    MessagesModule,
     ButtonModule,
+    // Message ne fonctionne pas sans l'import de CardModule
+    // ou de SharedModule (qui exporte PrimeTemplate)
     CardModule,
     BrowserModule,
     RippleModule,
