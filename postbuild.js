@@ -2,8 +2,11 @@ const exec = require('child_process').exec;
 const fs = require('fs');
 const path = require('path');
 
+console.log("Postbuild script started...");
+let args = require('minimist')(process.argv.slice(2));
+
 // find the styles css file
-const files = getFilesFromPath('./dist/purge-app', '.css');
+const files = getFilesFromPath(args['distPath'], '.css');
 let data = [];
 
 if (!files && files.length <= 0) {
@@ -11,7 +14,7 @@ if (!files && files.length <= 0) {
 } else {
   for (let f of files) {
     // get original file size
-    const originalSize = getFilesizeInKiloBytes('./dist/purge-app/' + f) + "kb";
+    const originalSize = getFilesizeInKiloBytes(args['distPath'] + "/" + f) + "kb";
     var o = { "file": f, "originalSize": originalSize, "newSize": "" };
     data.push(o);
   }
