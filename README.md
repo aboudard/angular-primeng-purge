@@ -1,4 +1,4 @@
-# TestApp
+# PurgeCss Test App
 
 Projet de test de purge CSS sur une application Angular PrimeNg.
 
